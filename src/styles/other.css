@@ -1,0 +1,12 @@
+/* skeleton styles */
+.move-left-to-right {
+  animation: move 2s infinite;
+}
+@keyframes move {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(calc(200%));
+  }
+}

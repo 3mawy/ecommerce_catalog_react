@@ -1,0 +1,27 @@
+.Toastify__toast-container {
+  @apply w-fit;
+  @apply absolute;
+}
+
+.Toastify__toast-body {
+  @apply p-0 m-0;
+}
+
+.custom-toast {
+  @apply rounded-md border border-separation-800 shadow-dropdown p-[0.625rem] min-h-fit;
+}
+.Toastify__toast--success {
+  @apply !bg-success !border-0;
+}
+.Toastify__toast--error {
+  @apply !bg-danger !border-0;
+}
+.Toastify__toast--success .description,
+.Toastify__toast--success .title,
+.Toastify__toast--error .description,
+.Toastify__toast--error .title {
+  @apply !text-white;
+}
+.custom-toast .toast-icon svg {
+  @apply w-full h-full;
+}

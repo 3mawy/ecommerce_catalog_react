@@ -1,0 +1,9 @@
+node_modules/
+.pnp/
+.pnp.js
+.pnpm-store/
+coverage/
+build/
+dist/
+public/style/
+pnpm-*.yaml
