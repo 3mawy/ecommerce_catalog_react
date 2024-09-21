@@ -28,6 +28,7 @@ export const paginationSlice = createSlice({
         },
         resetData: (state) => {
             state.data = initialState.data
+            state.page = 1
         },
     },
     extraReducers: (builder) => {

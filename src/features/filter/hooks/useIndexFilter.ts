@@ -8,8 +8,8 @@ import {resetData, selectPage, setCurrentPage} from '../../pagination/pagination
 import {
     addSelectedCategory,
     removeSelectedCategory,
-    resetFilters,
-    setFilterSidebar,
+    resetFilters, selectSearch,
+    setFilterSidebar, setSearch,
     setSelectedAttributes,
     setSelectedCategories,
     setSelectedType,
@@ -20,7 +20,6 @@ export const useIndexFilter = (
     initialPageSize = PAGE_SIZE,
     initialSortBy = 'created_at',
     initialSortDirection: SortDirection = 'desc',
-    initialSearch = '',
 ) => {
     const dispatch = useDispatch()
     const {
@@ -35,7 +34,8 @@ export const useIndexFilter = (
     const [pageSize, setPageSize] = useState(initialPageSize)
     const [sort, setSort] = useState(initialSortBy)
     const [sortDirection, setSortDirection] = useState(initialSortDirection)
-    const [search, setSearch] = useState(initialSearch)
+    // const [search, setSearch] = useState()
+    const search = useSelector(selectSearch)
 
     // useEffect(() => {
     //     // Reset page to 1 when filters or sort options change
@@ -61,8 +61,8 @@ export const useIndexFilter = (
 
     const handleSearchChange = useCallback((value: string) => {
         handleSetPage(1)
-        setSearch(value)
         dispatch(resetData())
+        dispatch(setSearch(value))
     }, [handleSetPage, dispatch])
 
     const handleTypeChange = useCallback((type: { id: number | null; name: string | null }) => {

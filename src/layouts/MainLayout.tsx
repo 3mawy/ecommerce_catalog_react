@@ -18,7 +18,7 @@ export default function MainLayout() {
     <div className='w-full min-h-screen flex flex-col bg-white'>
         <Header />
         <Suspense fallback={<div />}>
-          <div className={'h-full px-3 py-6 sm:p-6 lg:p-8'}>
+          <div className={'h-full px-3 py-6 sm:p-6 lg:px-8 lg:py-5'}>
             <Outlet />
           </div>
         </Suspense>

@@ -17,9 +17,8 @@ interface CatalogHeaderProps {
 
 export const CatalogHeader: React.FC<CatalogHeaderProps> = ({ setMobileFiltersOpen }) => {
     return (
-        <div className="flex items-baseline justify-between border-b border-gray-200 pb-6">
-            <h1 className="text-4xl font-bold tracking-tight text-gray-900 leading-none">New Arrivals</h1>
-
+        <div className="flex justify-between border-b border-gray-200 pb-5">
+            <h1 className="md:text-4xl text-3xl font-bold tracking-tight text-gray-900 leading-none">New Arrivals</h1>
             <div className="flex items-center">
                 <Menu as="div" className="relative inline-block text-left">
                     {/*<div>*/}
@@ -67,7 +66,7 @@ export const CatalogHeader: React.FC<CatalogHeaderProps> = ({ setMobileFiltersOp
                 </Menu>
                 <button
                     type="button"
-                    className="-m-2 ml-4 p-2 text-gray-400 hover:text-gray-500 sm:ml-6 lg:hidden"
+                    className=" ml-4 p-2 text-gray-400 hover:text-gray-500 sm:ml-6 lg:hidden"
                     onClick={() => setMobileFiltersOpen(true)}
                 >
                     <span className="sr-only">Filters</span>

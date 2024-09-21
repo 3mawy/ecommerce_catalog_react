@@ -6,6 +6,7 @@ interface FilterState {
     selectedType: { id: number | null; name: string | null }
     selectedCategories: { id: number; name: string }[]
     selectedAttributes: { [key: string]: (string | boolean)[] }
+    search: string
     isSidebarOpen: boolean
 }
 
@@ -13,6 +14,7 @@ const initialState: FilterState = {
     selectedType: {id: null, name: null},
     selectedCategories: [],
     selectedAttributes: {},
+    search: '',
     isSidebarOpen: false,
 }
 
@@ -35,10 +37,13 @@ export const filterSlice = createSlice({
         setSelectedAttributes(state, action: PayloadAction<{ [key: string]: (string | boolean)[] }>) {
             state.selectedAttributes = action.payload
         },
+        setSearch(state, action: PayloadAction<string>) {
+            state.search = action.payload
+        },
         setFilterSidebar(state, action: PayloadAction<boolean>) {
             state.isSidebarOpen = action.payload
         },
-        resetFilters(state) {
+        resetFilters() {
             return initialState
         },
     },
@@ -47,6 +52,7 @@ export const filterSlice = createSlice({
 export const {
     setSelectedType,
     setSelectedCategories,
+    setSearch,
     setSelectedAttributes,
     setFilterSidebar,
     addSelectedCategory,
@@ -57,4 +63,5 @@ export const {
 export const selectSelectedType = (state: RootState) => state.filters.selectedType
 export const selectSelectedCategories = (state: RootState) => state.filters.selectedCategories
 export const selectSelectedAttributes = (state: RootState) => state.filters.selectedAttributes
+export const selectSearch = (state: RootState) => state.filters.search // Selector for search state
 export const selectIsSidebarOpen = (state: RootState) => state.filters.isSidebarOpen

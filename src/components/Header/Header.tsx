@@ -8,6 +8,8 @@ import smallLogo from '../../assets/images/small-logo.svg'
 import { useGetCategoriesQuery} from '../../features/category/categoryApiSlice'
 import {useGetProductTypesQuery} from '../../features/productTypes/productTypesApiSlice'
 import {mapNavigationData} from './util'
+import SearchBar from "../SearchBar";
+import {Link} from "react-router-dom";
 
 
 
@@ -16,7 +18,6 @@ const Header = () => {
     const { data: types, isLoading: loadingTypes } = useGetProductTypesQuery({})
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
     const navigation = !loadingCategories && !loadingTypes && categories && types ? mapNavigationData(categories, types) : { categories: [], pages: [] }
-
 
     return (
         <div>
@@ -146,7 +147,6 @@ const Header = () => {
                     </div>
                 </Dialog>
             </Transition.Root>
-
             {/* Desktop Menu */}
             <header className="relative bg-white">
                 <p className="flex h-10 items-center justify-center bg-indigo-600 px-4 text-sm font-medium text-white sm:px-6 lg:px-8">
@@ -161,29 +161,31 @@ const Header = () => {
                                 onClick={() => setMobileMenuOpen(true)}
                             >
                                 <span className="sr-only">Open menu</span>
-                                <Bars3Icon className="h-6 w-6" aria-hidden="true" />
+                                <Bars3Icon className="h-6 w-6" aria-hidden="true"/>
                             </button>
 
                             {/* Logo */}
-                            <div className="ml-4 flex lg:ml-0">
-                                <a href="/">
-                                    <span className="sr-only">Catalog</span>
-                                    <img
-                                        className="h-8 w-auto"
-                                        src={smallLogo}
-                                        alt=""
-                                    />
-                                </a>
+                            <div className="w-full lg:w-auto flex lg:ml-0">
+                                <div className="mx-auto lg:mx-0 ">
+                                    <Link to="/">
+                                        <span className="sr-only">Catalog</span>
+                                        <img
+                                            className="h-8 w-auto"
+                                            src={smallLogo}
+                                            alt=""
+                                        />
+                                    </Link>
+                                </div>
                             </div>
 
                             {/* Flyout menus */}
-                            <Popover.Group className="hidden lg:ml-8 lg:block lg:self-stretch">
+                            <Popover.Group className="hidden lg:mx-8 lg:block lg:self-stretch">
                                 <div className="flex h-full space-x-8">
                                     {navigation.categories.map((category) => (
                                         <Popover key={category.name} className="flex">
-                                            {({ open }) => (
+                                            {({open}) => (
                                                 <>
-                                                    <div className="relative flex">
+                                                <div className="relative flex">
                                                         <Popover.Button
                                                             className={classNames(
                                                                 open
@@ -205,22 +207,33 @@ const Header = () => {
                                                         leaveFrom="opacity-100"
                                                         leaveTo="opacity-0"
                                                     >
-                                                        <Popover.Panel className="absolute inset-x-0 top-full z-20 text-sm text-gray-500">
-                                                            <div className="absolute inset-0 top-1/2 bg-white shadow" aria-hidden="true" />
+                                                        <Popover.Panel
+                                                            className="absolute inset-x-0 top-full z-20 text-sm text-gray-500">
+                                                            <div className="absolute inset-0 top-1/2 bg-white shadow"
+                                                                 aria-hidden="true"/>
 
                                                             <div className="relative bg-white">
                                                                 <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                                                                    <div className="grid grid-cols-2 gap-x-8 gap-y-10 py-16">
-                                                                        <div className="col-start-2 grid grid-cols-2 gap-x-8">
+                                                                    <div
+                                                                        className="grid grid-cols-2 gap-x-8 gap-y-10 py-16">
+                                                                        <div
+                                                                            className="col-start-2 grid grid-cols-2 gap-x-8">
                                                                         </div>
-                                                                        <div className="row-start-1 grid grid-cols-3 gap-x-8 gap-y-10 text-sm">
+                                                                        <div
+                                                                            className="row-start-1 grid grid-cols-3 gap-x-8 gap-y-10 text-sm">
                                                                             {category.sections.map((section) => (
                                                                                 <div key={section.name}>
-                                                                                    <a href={section.id} id={`${section.name}-heading`} className="font-medium text-gray-900">{section.name}</a>
-                                                                                    <ul role="list" aria-labelledby={`${section.name}-heading`} className="mt-6 space-y-6 sm:mt-4 sm:space-y-4">
+                                                                                    <a href={section.id}
+                                                                                       id={`${section.name}-heading`}
+                                                                                       className="font-medium text-gray-900">{section.name}</a>
+                                                                                    <ul role="list"
+                                                                                        aria-labelledby={`${section.name}-heading`}
+                                                                                        className="mt-6 space-y-6 sm:mt-4 sm:space-y-4">
                                                                                         {section.items.map((item) => (
-                                                                                            <li key={item.name} className="flex">
-                                                                                                <a href={item.id} className="hover:text-gray-800">{item.name}</a>
+                                                                                            <li key={item.name}
+                                                                                                className="flex">
+                                                                                                <a href={item.id}
+                                                                                                   className="hover:text-gray-800">{item.name}</a>
                                                                                             </li>
                                                                                         ))}
                                                                                     </ul>
@@ -248,15 +261,23 @@ const Header = () => {
                                 </div>
                             </Popover.Group>
 
-                            <div className="ml-auto flex items-center">
+                            <div className="w-auto lg:w-full ml-auto flex justify-between items-center">
                                 {/* Cart */}
-                                <div className="ml-4 flow-root lg:ml-6">
+                                <div className="hidden lg:block flex-grow max-w-2xl ml-auto ">
+                                    <SearchBar/>
+                                </div>
+                                <div className="flow-root lg:ml-6">
                                     <a href="#" className="group -m-2 flex items-center p-2">
-                                        <ShoppingBagIcon className="h-6 w-6 flex-shrink-0 text-gray-400 group-hover:text-gray-500" aria-hidden="true" />
+                                        <ShoppingBagIcon
+                                            className="h-6 w-6 flex-shrink-0 text-gray-400 group-hover:text-gray-500"
+                                            aria-hidden="true"/>
                                         <span className="ml-2 text-sm font-medium text-gray-700">0</span>
                                     </a>
                                 </div>
                             </div>
+                        </div>
+                        <div className="pb-2 lg:hidden">
+                            <SearchBar/>
                         </div>
                     </div>
                 </nav>
