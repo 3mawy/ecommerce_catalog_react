@@ -8,23 +8,23 @@ export interface IUser {
   created_at?: string
   updated_at?: string
 }
-export interface IUserForm extends Omit<IUser, 'id'> {
-  password: string
-}
-export const initUser: IUserForm = {
-  username: '',
-  email: '',
-  password: '',
+// export interface IUserForm extends Omit<IUser, 'id'> {
+//   password: string
+// }
+export const initUser: IUser = {
+  id: 1,
+  username: 'test',
+  email: 'test@test.com',
 }
 
 type AuthState = {
   user: IUser | null
 }
-
+// Disabled auth. to regain it set user to null in initialState
 export const authSlice = createAppSlice({
   name: 'auth',
   initialState: {
-    user: null,
+    user: initUser,
   } as AuthState,
   reducers: {
     setUser: (
